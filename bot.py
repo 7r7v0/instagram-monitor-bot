@@ -713,6 +713,7 @@ async def on_command_error(ctx, error):
             color=COLORS['danger'],
         )
         embed.add_field(name="**Usage**", value=f"{ctx.prefix}{ctx.command.name} {ctx.command.signature}", inline=False)
+        try:
             await ctx.send(embed=embed)
         except Exception as e:
             print(f"Error sending error message: {e}")

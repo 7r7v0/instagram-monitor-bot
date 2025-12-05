@@ -854,9 +854,8 @@ async def debug(ctx):
         
     ...
 except Exception as e:
-    print(f"🔴 Debug error: {e}")
+    print(f"🥲 Debug error: {e}")
 
-# ←← YAHAN paste karna hai
 from aiohttp import web
 import asyncio, os
 
@@ -876,7 +875,6 @@ asyncio.get_event_loop().create_task(start_webserver())
 if __name__ == "__main__":
     print("🚀 Starting Instagram Monitor Bot...")
     print("📡 Connecting to Discord...")
-
     try:
         bot.run(TOKEN)
 

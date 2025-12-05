@@ -870,7 +870,6 @@ async def start_webserver():
     await runner.setup()
     site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
     await site.start()
-# ←← YAHAN tak
 
 asyncio.get_event_loop().create_task(start_webserver())
 

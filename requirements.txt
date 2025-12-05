@@ -4,3 +4,4 @@ instaloader
 aiohttp
 requests
 beautifulsoup4
+audioop-lts

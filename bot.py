@@ -14,24 +14,6 @@ import json
 from instaloader.exceptions import LoginRequiredException, BadCredentialsException, ConnectionException, TooManyRequestsException
 import logging
 
-# --- Web Server for Railway Hosting ---
-from aiohttp import web
-
-async def handle(request):
-    return web.Response(text="Bot is running!")
-
-async def start_webserver():
-    app = web.Application()
-    app.router.add_get("/", handle)
-
-    runner = web.AppRunner(app)
-    await runner.setup()
-
-    site = web.TCPSite(runner, host="0.0.0.0", port=8000)
-    await site.start()
-
-    print("🌐 Webserver running on port 8000")
-
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('discord_bot')
@@ -870,17 +852,32 @@ async def debug(ctx):
         print(f"🔧 Debug requested by {ctx.author} in {ctx.guild.name}#{ctx.channel.name}")
         print(f"📊 Bot permissions: {bot_permissions}")
         
-    except Exception as e:
-        await ctx.send(f"❌ Debug failed with error: {str(e)}")
-        print(f"Debug error: {e}")
+    ...
+except Exception as e:
+    print(f"🔴 Debug error: {e}")
 
-# --- Start Webserver for Railway ---
-import asyncio
+# ←← YAHAN paste karna hai
+from aiohttp import web
+import asyncio, os
+
+async def handle(request):
+    return web.Response(text="Bot is running!")
+
+async def start_webserver():
+    app = web.Application()
+    app.router.add_get("/", handle)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
+    await site.start()
+# ←← YAHAN tak
+
 asyncio.get_event_loop().create_task(start_webserver())
 
 if __name__ == "__main__":
     print("🚀 Starting Instagram Monitor Bot...")
     print("📡 Connecting to Discord...")
+
     try:
         bot.run(TOKEN)
 
@@ -901,6 +898,4 @@ if __name__ == "__main__":
         print("-" * 60)
 
     finally:
-        if session and not session.closed:
-
-            asyncio.run(session.close())
+        pass

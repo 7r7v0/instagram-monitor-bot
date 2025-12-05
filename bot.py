@@ -852,7 +852,6 @@ async def debug(ctx):
         print(f"🔧 Debug requested by {ctx.author} in {ctx.guild.name}#{ctx.channel.name}")
         print(f"📊 Bot permissions: {bot_permissions}")
         
-    ...
 except Exception as e:
     print(f"🥲 Debug error: {e}")
 

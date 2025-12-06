@@ -801,27 +801,27 @@ async def debug(ctx):
     try:
         # Check bot permissions in the current channel
         bot_permissions = ctx.channel.permissions_for(ctx.guild.me)
-        
+
         debug_embed = discord.Embed(
             title="🔧 Bot Debug Information",
             description="Detailed bot configuration and permissions",
             color=COLORS['dark'],
         )
-        
+
         # Bot info
         debug_embed.add_field(
             name="🤖 **Bot Information**",
             value=f"**Name:** {bot.user.name}\n**ID:** {bot.user.id}\n**Status:** {bot.user.status}\n**Latency:** {round(bot.latency * 1000)}ms",
             inline=False
         )
-        
+
         # Server info
         debug_embed.add_field(
             name="🏠 **Server Information**",
             value=f"**Server:** {ctx.guild.name}\n**Channel:** {ctx.channel.name}\n**Channel ID:** {ctx.channel.id}",
             inline=False
         )
-        
+
         # Permissions
         permissions_text = ""
         permissions_text += "✅ Send Messages\n" if bot_permissions.send_messages else "❌ Send Messages\n"
@@ -830,30 +830,23 @@ async def debug(ctx):
         permissions_text += "✅ Add Reactions\n" if bot_permissions.add_reactions else "❌ Add Reactions\n"
         permissions_text += "✅ Read Message History\n" if bot_permissions.read_message_history else "❌ Read Message History\n"
         permissions_text += "✅ View Channel\n" if bot_permissions.view_channel else "❌ View Channel\n"
-        
+
         debug_embed.add_field(
             name="🔐 **Bot Permissions**",
             value=permissions_text,
             inline=False
         )
-        
-        # Command prefix
-        debug_embed.add_field(
-            name="⚙️ **Configuration**",
-            value=f"**Prefix:** {bot.command_prefix}\n**Commands:** {len(bot.commands)}\n**Intents:** Message Content Enabled",
-            inline=False
-        )
-        
+
         debug_embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar.url if ctx.author.avatar else None)
-        
+
         await ctx.send(embed=debug_embed)
-        
-        # Additional console output
+
         print(f"🔧 Debug requested by {ctx.author} in {ctx.guild.name}#{ctx.channel.name}")
         print(f"📊 Bot permissions: {bot_permissions}")
-        
-except Exception as e:
-    print(f"🥲 Debug error: {e}")
+
+    except Exception as e:
+        print(f"🥲 Debug error: {e}")
+
 
 # ---------------- WEB SERVER ----------------
 

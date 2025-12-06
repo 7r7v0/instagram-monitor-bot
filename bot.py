@@ -875,12 +875,11 @@ async def start_webserver():
 asyncio.get_event_loop().create_task(start_webserver())
 
 
-# ---------------- BOT START ----------------
+# -------------------- BOT START --------------------
 
 if __name__ == "__main__":
     print("🚀 Starting Instagram Monitor Bot...")
     print("📡 Connecting to Discord...")
-
     try:
         bot.run(TOKEN)
 
@@ -899,3 +898,6 @@ if __name__ == "__main__":
         print(f"⚠️ Error: {e}")
         print("📌 Check your token and internet connection")
         print("-" * 60)
+
+    finally:
+        pass   

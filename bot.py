@@ -20,7 +20,7 @@ logger = logging.getLogger('discord_bot')
 
 # Load environment variables
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -550,32 +550,35 @@ async def monitorunban(ctx, username: str):
     except:
         pass
 
-# 5. !unbandone
 @bot.command(description="Complete the unban monitoring process")
 async def unbandone(ctx, username: str = None):
     now = datetime.now().strftime('%H:%M:%S')
+
     if username:
         username = username.lstrip('@')
+
         # Fetch real Instagram data
         data = await get_instagram_data(username)
         followers = data.get('followers', 0) if data.get('success', False) else 0
-        # Calculate time taken (simulated)
+
+        # Time taken (random)
         import random
         hours = random.randint(1, 6)
         minutes = random.randint(0, 59)
         seconds = random.randint(0, 59)
-        time_taken = f"{hours} hour{'s' if hours != 1 else ''}, {minutes} minute{'s' if minutes != 1 else ''}, {seconds} second{'s' if seconds != 1 else ''}"
+
+        # FAKE BLUE LINK (same as screenshot)
+        blue_line = f"[Account Recovered | @{username} 🏆✅](https://instagram.com/)"
+
         description = (
-            f"✅ Monitoring Status: @{username} has been unbanned\n"
-            f"👥 Followers: {followers:,}\n"
-            f"⏱ Time taken: {time_taken}"
+            f"{blue_line}\n"
+            f"| **Followers:** {followers:,}  ⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
         )
+
     else:
-        description = "✅ Monitoring Status: User has been unbanned"
-    embed = discord.Embed(
-        description=description,
-        color=COLORS['success'],
-    )
+        description = "[Account Recovered](https://instagram.com/)"
+
+    embed = discord.Embed(description=description, color=COLORS['success'])
     await ctx.send(embed=embed)
 
 # 6. !commands (custom help command)

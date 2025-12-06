@@ -552,8 +552,6 @@ async def monitorunban(ctx, username: str):
 
 @bot.command(description="Complete the unban monitoring process")
 async def unbandone(ctx, username: str = None):
-    now = datetime.now().strftime('%H:%M:%S')
-
     if username:
         username = username.lstrip('@')
 
@@ -561,18 +559,18 @@ async def unbandone(ctx, username: str = None):
         data = await get_instagram_data(username)
         followers = data.get('followers', 0) if data.get('success', False) else 0
 
-        # Random time taken
+        # Simulated time taken
         import random
         hours = random.randint(1, 6)
         minutes = random.randint(0, 59)
         seconds = random.randint(0, 59)
 
-        # Blue text line (fake link for blue color)
+        # Blue clickable style text
         blue_line = f"[Account Recovered | @{username} 🏆✅](https://instagram.com/)"
 
         description = (
             f"{blue_line}\n"
-            f"| **Followers:** {followers:,}  "
+            f"| **Followers:** {followers:,} | "
             f"⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
         )
 
@@ -586,6 +584,7 @@ async def unbandone(ctx, username: str = None):
     )
 
     await ctx.send(embed=embed)
+
 
 
 # 6. !commands (custom help command)

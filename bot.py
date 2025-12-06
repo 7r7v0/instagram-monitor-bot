@@ -855,6 +855,8 @@ async def debug(ctx):
 except Exception as e:
     print(f"🥲 Debug error: {e}")
 
+# ---------------- WEB SERVER ----------------
+
 from aiohttp import web
 import asyncio, os
 
@@ -869,11 +871,16 @@ async def start_webserver():
     site = web.TCPSite(runner, "0.0.0.0", int(os.environ.get("PORT", 10000)))
     await site.start()
 
+# Start webserver (Railway keep-alive)
 asyncio.get_event_loop().create_task(start_webserver())
+
+
+# ---------------- BOT START ----------------
 
 if __name__ == "__main__":
     print("🚀 Starting Instagram Monitor Bot...")
     print("📡 Connecting to Discord...")
+
     try:
         bot.run(TOKEN)
 
@@ -892,6 +899,3 @@ if __name__ == "__main__":
         print(f"⚠️ Error: {e}")
         print("📌 Check your token and internet connection")
         print("-" * 60)
-
-    finally:
-        pass

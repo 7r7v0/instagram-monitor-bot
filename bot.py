@@ -561,25 +561,32 @@ async def unbandone(ctx, username: str = None):
         data = await get_instagram_data(username)
         followers = data.get('followers', 0) if data.get('success', False) else 0
 
-        # Time taken (random)
+        # Random time taken
         import random
         hours = random.randint(1, 6)
         minutes = random.randint(0, 59)
         seconds = random.randint(0, 59)
 
-        # FAKE BLUE LINK (same as screenshot)
+        # Blue text line (fake link for blue color)
         blue_line = f"[Account Recovered | @{username} 🏆✅](https://instagram.com/)"
 
         description = (
             f"{blue_line}\n"
-            f"| **Followers:** {followers:,}  ⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
+            f"| **Followers:** {followers:,}  "
+            f"⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
         )
 
     else:
         description = "[Account Recovered](https://instagram.com/)"
 
-    embed = discord.Embed(description=description, color=COLORS['success'])
+    embed = discord.Embed(
+        title="Monitoring Status",
+        description=description,
+        color=COLORS['success']
+    )
+
     await ctx.send(embed=embed)
+
 
 # 6. !commands (custom help command)
 @bot.command(description="Show all available commands with descriptions")

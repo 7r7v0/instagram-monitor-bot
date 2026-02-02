@@ -303,7 +303,7 @@ def fetch_instagram_selenium(username):
         driver.get(f"https://www.instagram.com/{username}/")
         
         # Wait for page to load
-        time.sleep(3)
+        await asyncio.sleep(x)
         
         # Extract data
         try:

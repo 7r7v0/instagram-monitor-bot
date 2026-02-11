@@ -549,14 +549,13 @@ async def monitorunban(ctx, username: str):
         await loading_msg.add_reaction('⏰')
     except:
         pass
-
+        
 @bot.command(description="Complete the unban monitoring process")
 async def unbandone(ctx, username: str = None):
 
     if username:
         username = username.lstrip('@')
 
-        # Fetch Instagram data
         data = await get_instagram_data(username)
         followers = data.get('followers', 0) if data.get('success', False) else 0
 
@@ -565,17 +564,14 @@ async def unbandone(ctx, username: str = None):
         minutes = random.randint(0, 59)
         seconds = random.randint(0, 59)
 
-        # Blue clickable line
-        blue_line = f"[Account Recovered | @{username} 🏆✅](https://instagram.com/)"
-
         description = (
-            f"{blue_line}\n\n"
+            f"**Account Recovered | @{username} 🏆✅**\n"
             f"| Followers: {followers:,} | ⏱ Time taken: "
             f"{hours} hours, {minutes} minutes, {seconds} seconds"
         )
 
     else:
-        description = "[Account Recovered](https://instagram.com/)"
+        description = "**Account Recovered 🏆✅**"
 
     embed = discord.Embed(
         title="Monitoring Status",
@@ -903,4 +899,5 @@ if __name__ == "__main__":
     finally:
 
         pass   
+
 

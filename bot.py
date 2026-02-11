@@ -569,11 +569,12 @@ async def unbandone(ctx, username: str = None):
         blue_line = f"[Account Recovered | @{username} 🏆✅](https://instagram.com/)"
 
         description = (
-            f"{blue_line}\n"
-            f"| **Followers:** {followers:,} | "
-            f"⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
-        )
-
+          description = (
+    f"{blue_line}\n"
+    f"\n"
+    f"| **Followers:** {followers:,} "
+    f"| ⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
+)
     else:
         description = "[Account Recovered](https://instagram.com/)"
 
@@ -902,4 +903,5 @@ if __name__ == "__main__":
         print("-" * 60)
 
     finally:
+
         pass   

@@ -549,34 +549,33 @@ async def monitorunban(ctx, username: str):
         await loading_msg.add_reaction('⏰')
     except:
         pass
-        
+
 @bot.command(description="Complete the unban monitoring process")
 async def unbandone(ctx, username: str = None):
 
-    if username:
-        username = username.lstrip('@')
+    if not username:
+        await ctx.send("Please provide a username.")
+        return
 
-        data = await get_instagram_data(username)
-        followers = data.get('followers', 0) if data.get('success', False) else 0
+    username = username.lstrip('@')
 
-        import random
-        hours = random.randint(1, 6)
-        minutes = random.randint(0, 59)
-        seconds = random.randint(0, 59)
+    # Fake followers (no Instagram API)
+    followers = random.randint(1000, 10000)
 
-        description = (
-            f"**Account Recovered | @{username} 🏆✅**\n"
-            f"| Followers: {followers:,} | ⏱ Time taken: "
-            f"{hours} hours, {minutes} minutes, {seconds} seconds"
-        )
+    hours = random.randint(1, 6)
+    minutes = random.randint(0, 59)
+    seconds = random.randint(0, 59)
 
-    else:
-        description = "**Account Recovered 🏆✅**"
+    description = (
+        f"[Account Recovered | @{username} 🏆✅](https://instagram.com/{username})\n"
+        f"| **Followers:** {followers:,} | "
+        f"⏱ **Time taken:** {hours} hours, {minutes} minutes, {seconds} seconds"
+    )
 
     embed = discord.Embed(
         title="Monitoring Status",
         description=description,
-        color=COLORS['success']
+        color=0x2ecc71
     )
 
     await ctx.send(embed=embed)
@@ -897,7 +896,4 @@ if __name__ == "__main__":
         print("-" * 60)
 
     finally:
-
         pass   
-
-
